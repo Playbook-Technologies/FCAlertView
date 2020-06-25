@@ -87,6 +87,8 @@
 // AlertView TextView
 
 @property (nonatomic, retain) UITextField *textField;
+@property (nonatomic, weak) UITextField * firstTextFieldResponder;
+
 
 // AlertView Customizations
 

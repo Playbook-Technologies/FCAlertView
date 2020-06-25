@@ -507,13 +507,13 @@
         
         for (int i = 0; i < MIN(alertTextFields.count,4); i++) {
             
-            UITextField *tf = [[UITextField alloc] initWithFrame:CGRectMake(12.5, descriptionLabel.frame.size.height + descriptionLabel.frame.origin.y + 10.5 + 45*i, alertViewFrame.size.width - 25, 40)];
+            UITextField *tf = [[UITextField alloc] initWithFrame:CGRectMake(8, descriptionLabel.frame.size.height + descriptionLabel.frame.origin.y + 10.5 + 45*i, alertViewFrame.size.width - 16, 40)];
             
             if ([[alertTextFields objectAtIndex:i] objectForKey:@"field"] != nil &&
                 [[[alertTextFields objectAtIndex:i] objectForKey:@"field"] isKindOfClass:[UITextField class]]) {
                 
                 tf = [[alertTextFields objectAtIndex:i] objectForKey:@"field"];
-                tf.frame = CGRectMake(12.5, descriptionLabel.frame.size.height + descriptionLabel.frame.origin.y + 10.5 + 45*i, alertViewFrame.size.width - 25, 40);
+                tf.frame = CGRectMake(8, descriptionLabel.frame.size.height + descriptionLabel.frame.origin.y + 10.5 + 45*i, alertViewFrame.size.width - 16, 40);
                 
             }
             
@@ -541,11 +541,11 @@
                 [tf setReturnKeyType:UIReturnKeyDone];
             else
                 [tf setReturnKeyType:UIReturnKeyNext];
-            
-            UIView *paddingView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 5, 20)];
-            tf.leftView = paddingView;
-            tf.leftViewMode = UITextFieldViewModeAlways;
-            
+            if (tf.leftView == nil) {
+                UIView *paddingView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 5, 20)];
+                tf.leftView = paddingView;
+                tf.leftViewMode = UITextFieldViewModeAlways;
+            }
             [alertTextFieldHolder addObject:tf];
             
             [alertView addSubview:tf];
@@ -1413,6 +1413,9 @@
         }
         
     } completion:^(BOOL finished) {
+        if (self.firstTextFieldResponder != nil) {
+            [self.firstTextFieldResponder becomeFirstResponder];
+        }
         if (_bounceAnimations)
             [UIView animateWithDuration:0.5 delay:0.0 options:UIViewAnimationOptionCurveEaseOut animations:^{
                 if (!_animateAlertInFromTop && !_animateAlertInFromLeft && !_animateAlertInFromRight && !_animateAlertInFromBottom)
