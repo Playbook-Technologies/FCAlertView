@@ -27,7 +27,6 @@
     
     // AlertView & Contents
     
-    UIView *alertView;
     UIView *alertViewContents;
     CAShapeLayer *circleLayer;
     
@@ -81,7 +80,7 @@
 @property (nonatomic, retain) UIFont *subtitleFont;
 
 // AlertView Background
-
+@property (nonatomic, retain) UIView *alertView;
 @property (nonatomic, retain) UIView *alertBackground;
 
 // AlertView TextView
@@ -92,6 +91,7 @@
 
 // AlertView Customizations
 
+@property CGFloat titleOffset;
 @property CGFloat customHeight;
 @property CGFloat customSpacing;
 

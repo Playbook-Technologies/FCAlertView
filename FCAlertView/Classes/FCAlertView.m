@@ -10,6 +10,8 @@
 
 @implementation FCAlertView
 
+@synthesize alertView;
+
 - (id)init
 {
     self = [super init];
@@ -58,7 +60,7 @@
         _numberOfButtons = 0;
         _autoHideSeconds = 0;
         _cornerRadius = 18.0f;
-        
+        _titleOffset = 0;
         _dismissOnOutsideTouch = NO;
         _hideAllButtons = NO;
         _hideDoneButton = NO;
@@ -179,9 +181,7 @@
             NSLog(@"Forced Dismiss on Outside Touch");
             
         }
-        
     }
-    
 }
 
 #pragma mark - Title Validation
@@ -270,7 +270,7 @@
 - (void)drawRect:(CGRect)rect {
     
     defaultSpacing = [self configureAVWidth];
-    defaultHeight = [self configureAVHeight];
+    defaultHeight = [self configureAVHeight] + _titleOffset;
     
     CGSize result = [[UIScreen mainScreen] bounds].size;
     
@@ -355,7 +355,7 @@
                                     alertViewFrame.size.height - 20);
     }
     
-    UILabel *descriptionLabel = [[UILabel alloc] initWithFrame:CGRectMake(25.0f,
+    UILabel *descriptionLabel = [[UILabel alloc] initWithFrame:CGRectMake(25.0f, _titleOffset +
                                                                           descriptionLevel + (alertViewWithVector * 30),
                                                                           alertViewFrame.size.width - 50.0f,
                                                                           60.0f)];
@@ -380,7 +380,7 @@
     // HEADER VIEW - With Title & Subtitle
     
     UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(15.0f,
-                                                                    20.0f + (alertViewWithVector * 30),
+                                                                    20.0f + _titleOffset + (alertViewWithVector * 30),
                                                                     alertViewFrame.size.width - 30.0f,
                                                                     30.0f)];
     
@@ -621,9 +621,9 @@
                                       alertViewFrame.size.width/2,
                                       45);
         if (_detachButtons) {
-            doneButton.frame = CGRectMake(alertViewFrame.size.width/2 + 6,
+            doneButton.frame = CGRectMake(alertViewFrame.size.width/2 + 2,
                                           doneButton.frame.origin.y - 5,
-                                          doneButton.frame.size.width - 16,
+                                          doneButton.frame.size.width - 8,
                                           40);
             doneButton.layer.cornerRadius = MIN(self.cornerRadius, doneButton.frame.size.height/2);
             doneButton.layer.masksToBounds = YES;
@@ -664,9 +664,9 @@
                                            45);
         
         if (_detachButtons) {
-            otherButton.frame = CGRectMake(alertViewFrame.size.width/2 - otherButton.frame.size.width + 16 - 6,
+            otherButton.frame = CGRectMake(alertViewFrame.size.width/2 - otherButton.frame.size.width + 8 - 2,
                                            otherButton.frame.origin.y - 5,
-                                           otherButton.frame.size.width - 16,
+                                           otherButton.frame.size.width - 8,
                                            40);
             otherButton.layer.cornerRadius = MIN(self.cornerRadius, otherButton.frame.size.height/2);
             otherButton.layer.masksToBounds = YES;
