@@ -15,23 +15,23 @@
 @protocol FCAlertViewDelegate;
 
 @interface FCAlertView : UIView <UITextFieldDelegate> {
-    
+
     // Blur
-    
+
     UIVisualEffectView *backgroundVisualEffectView;
-    
+
     // Default UI adjustments
-    
+
     CGFloat defaultHeight;
     CGFloat defaultSpacing;
-    
+
     // AlertView & Contents
-    
+
     UIView *alertViewContents;
     CAShapeLayer *circleLayer;
-    
+
     // Customizations made to UI
-    
+
     NSMutableArray *alertButtons;
     NSMutableArray *alertTextFields;
     NSMutableArray *alertTextFieldHolder;
@@ -39,31 +39,31 @@
     NSString *doneTitle;
     UIImage *vectorImage;
     NSString *alertType;
-    
+
     // Frames
-    
+
     CGRect alertViewFrame;
     CGRect currentAVCFrames;
     CGRect descriptionLabelFrames;
-    
+
     // Alert AudioPlayer
-    
+
     AVAudioPlayer *player;
-    
+
     // Alert Rating Types
-    
+
     NSInteger alertTypeRatingHearts;
     NSInteger alertTypeRatingStars;
-    
+
     UIView *ratingController;
     UIButton *item1;
     UIButton *item2;
     UIButton *item3;
     UIButton *item4;
     UIButton *item5;
-    
+
     NSInteger currentRating;
-    
+
 }
 
 // Delegate
@@ -92,6 +92,7 @@
 // AlertView Customizations
 
 @property CGFloat titleOffset;
+@property CGFloat bottomOffset;
 @property CGFloat customHeight;
 @property CGFloat customSpacing;
 
